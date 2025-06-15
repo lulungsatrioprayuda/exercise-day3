@@ -1,5 +1,5 @@
 import { todo } from "node:test";
-import { Todo, CreateTodoDto, UpdateTodoDto } from "../models/Todos";
+import { Todo, CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 import { v4 as uuidv4 } from "uuid";
 
 //membuat memori kosong terlebih dahulu
