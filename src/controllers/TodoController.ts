@@ -68,4 +68,36 @@ export const TodoController = {
       });
     }
   },
+  //  update todo
+  updateTodo: (req: Request, res: Response): void => {
+    try {
+      const id = req.params.id;
+      const todoData: UpdateTodoDto = req.body;
+      const updatedTodo = TodoService.updateTodo(id, todoData);
+
+      if (!req) {
+        res.status(400).json({
+          success: false,
+          error: "Bad request",
+        });
+        return;
+      }
+      if (!updatedTodo) {
+        res.status(404).json({
+          success: false,
+          error: `Todo with id ${id} not found or not exist`,
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: updatedTodo,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to update todo",
+      });
+    }
+  },
 };
