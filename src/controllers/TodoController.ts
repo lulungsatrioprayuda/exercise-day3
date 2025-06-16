@@ -100,4 +100,29 @@ export const TodoController = {
       });
     }
   },
+
+  //  delete todo
+  deleteTodo: (req: Request, res: Response): void => {
+    try {
+      const id = req.params.id;
+      const idDeleted = TodoService.deleteTodo(id);
+
+      if (!idDeleted) {
+        res.status(404).json({
+          success: false,
+          error: `Todo with id ${id} not found or not exist`,
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Todo deleted successfully",
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to delete todo",
+      });
+    }
+  },
 };
