@@ -18,4 +18,30 @@ export const TodoController = {
       });
     }
   },
+
+  //get data by id
+  getTodoById: (req: Request, res: Response): void => {
+    try {
+      const id = req.params.id;
+      const todo = TodoService.getTodoById(id);
+
+      if (!todo) {
+        res.status(404).json({
+          success: false,
+          error: "Todo not found or not exist",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: todo,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Gagal mengambil data todo",
+      });
+    }
+  },
 };
