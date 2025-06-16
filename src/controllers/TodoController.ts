@@ -44,4 +44,28 @@ export const TodoController = {
       });
     }
   },
+
+  //create todo
+  createTodo: (req: Request, res: Response): void => {
+    try {
+      const todoData: CreateTodoDto = req.body;
+      if (!req) {
+        res.status(400).json({
+          success: false,
+          error: "Bad request",
+        });
+        return;
+      }
+      const newTodo = TodoService.createTodo(todoData);
+      res.status(201).json({
+        success: true,
+        data: newTodo,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to create todo",
+      });
+    }
+  },
 };
